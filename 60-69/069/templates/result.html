@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block navbar %}
+{% endblock %}
+{% block content %}
+
+<div class="jumbotron">
+    <div class="container">
+        <!-- <ul class=entries> -->
+            <table class="table table-hover table-bordered table-striped">
+                <tr>
+                    <th>名前</th>
+                    <th>結成年</th>
+                    <th>活動場所</th>
+                    <th>タグ</th>
+                </tr>
+                {% for artist in result %}
+                <tr>
+                    <td>{{artist["name"]}}</td>
+                    <td>{{artist["begin"]}}</td>
+                    <td>{{artist["area"]}}</td>
+                    <td>{{artist["tags"]}}</td>
+                </tr>
+                {% else %}
+                <p>何もない💢💢💢</p>
+                {% endfor %}
+
+            </table>
+            <!-- {% for artist in result %}                                    -->
+            <!-- <li><p>Name: {{artist["name"]}}  Area: {{artist["area"]}} <p> -->
+            <!-- {% else %}                                   -->
+            <!-- <li><em>Unbelievable. No Artists Found.</em> -->
+            <!-- {% endfor %}                                 -->
+        <!-- </ul> -->
+    </div>
+</div>
+{% endblock %}

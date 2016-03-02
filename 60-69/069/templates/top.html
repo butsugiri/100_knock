@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{%import 'macros.html' as macros %}
+
+{% block navbar %}
+<form method="POST" action="/" class="navbar-form navbar-right">
+    <div class="form-group">
+
+        {{ macros.render_field(form.name, label_visible=False, placeholder='Artist Name') }}
+    </div>
+    <div class="form-group">
+        {{ macros.render_field(form.area, label_visible=False, placeholder='Area') }}
+    </div>
+    <div class="form-group">
+        {{ macros.render_field(form.tag, label_visible=False, placeholder='Tag') }}
+    </div>
+    <button type="submit" class="btn btn-success">Search</button>
+</form>
+{% endblock %}
+
+{% block content %}
+<div class="jumbotron">
+    <div class="container">
+        <h1>言語処理100本ノック</h1>
+        <h2>69. Webアプリケーションの作成</h2>
+        <p>ユーザから入力された検索条件に合致するアーティストの情報を表示するWebアプリケーションを作成せよ．アーティスト名，アーティストの別名，タグ等で検索条件を指定し，アーティスト情報のリストをレーティングの高い順などで整列して表示せよ．</p>
+
+        <p><a class="btn btn-primary btn-lg" href="http://www.cl.ecei.tohoku.ac.jp/nlp100/" role="button">100本ノックについて &raquo;</a></p>
+    </div>
+</div>
+{% endblock %}
+
