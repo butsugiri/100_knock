@@ -18,6 +18,24 @@ class Chunk:
         self.dst = None
         self.src = []
 
+    #chunkに含まれるテキスト(記号以外)を返すクラスメソッド
+    #q42で初登場
+    def chunk2str(self):
+        output = []
+        for morph in self.morphs:
+            if morph.pos == u"記号":
+                pass
+            else:
+                output.append(morph.surface)
+        return "".join(output)
+
+    #文節にある品詞が含まれているか否かを返す
+    #q43で初登場
+    def contains(self,pos):
+        pos = unicode(pos)
+        pos_list = [x.pos for x in self.morphs]
+        return pos in pos_list
+
     def __repr__(self):
         return " ".join(x.surface for x in self.morphs)
 
@@ -40,7 +58,6 @@ def gen_chunks(fi):
             dst = int(line.split()[2].rstrip("D"))
             if dst != -1:
                 chunk.dst = dst
-                print chunk.dst
         elif line == "EOS":
             if chunks:
                 chunks.append(chunk)
