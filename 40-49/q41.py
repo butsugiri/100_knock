@@ -22,7 +22,6 @@ class Chunk:
         return " ".join(x.surface for x in self.morphs)
 
 def gen_chunks(fi):
-
     def follow_srcs(chunks):
         for n,chunk in enumerate(chunks):
             if chunk.dst:
