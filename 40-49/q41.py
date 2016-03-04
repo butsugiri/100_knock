@@ -10,7 +10,7 @@ awk "NR==hogehoeg"の書き方で，指定した行を抽出できる．
 セミコロン(;)ならば指定した行のみ抽出できる．
 """
 import sys
-from q40 import Morph,load_morph
+from q40 import Morph
 
 class Chunk:
     def __init__(self):
