@@ -1,6 +1,26 @@
 # -*- coding: utf-8 -*-
 """
+49. 文中のすべての名詞句のペアを結ぶ最短係り受けパスを抽出せよ．
 
+実行例
+❯ cat data/neko.txt.cabocha | awk "NR==72,NR==98" | python q49.py
+Xは | Yで -> 始めて -> 人間という -> ものを | 見た
+Xは | Yという -> ものを | 見た
+Xは | Yを | 見た
+Xで -> 始めて -> Yという
+Xで -> 始めて -> 人間という -> Yを
+Xという -> Yを
+
+本当に欲しかった出力
+Xは | Yで -> 始めて -> 人間という -> ものを | 見た
+Xは | Yという -> ものを | 見た
+Xは | Yを | 見た
+Xで -> 始めて -> Y
+Xで -> 始めて -> 人間という -> Y
+Xという -> Y
+
+文節iから文節jで終わる場合は，名詞だけで打ち切る処理が別途必要になるが
+問を素直に実装すると，自分の出力が正しい気がする
 """
 import sys
 from q40 import Morph
@@ -64,11 +84,11 @@ def main(chunks):
             mid = " -> ".join(x.chunk2str() for x in mid_term)
             if mid:
                 output = [i_term,mid,j_term]
-            else:
+            else: #文節iと文節jが隣接している場合(i.e. midなし)
                 output = [i_term,j_term]
             print " -> ".join(output)
         else:
-#(3b)そうでない場合(途中で合流する場合)
+#(3b)そうでない場合(枝分かれした文節が途中で合流する場合)
             k_path = (i_path & j_path) #合流点以降のパス
             i_path = (i_path - k_path) #iからk(合流点)までのパス
             j_path = (j_path - k_path) #jからkまでのパス
@@ -80,7 +100,7 @@ def main(chunks):
             i_chunks[0] = replace_leftmost_noun(i_chunks[0],u"X")
             j_chunks[0] = replace_leftmost_noun(j_chunks[0],u"Y")
 
-            #それぞれを->で結合しておく
+            #chunkをstrに変換し，それぞれを->で結合しておく
             i_term = " -> ".join(x.chunk2str() for x in i_chunks)
             j_term = " -> ".join(x.chunk2str() for x in j_chunks)
             k_term = " -> ".join(x.chunk2str() for x in k_chunks)
