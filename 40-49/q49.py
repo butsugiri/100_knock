@@ -1,17 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-名詞句（名詞の連続）を含む文節を2つ探す（これらの名詞句が含まれる文節の番号をそれぞれi，jとする．i < j）．
 
-文節iが含む名詞句を"X"，文節jが含む名詞句を"Y"に，それぞれ置き換える．
-
-文節iから述語（構文木の根）までのパス，文節jから述語までのパスを求め，
-
-文節iからのパスが文節jからのパスを完全に包含していれば，文節iから文節jのパスを表示
-そうでない場合は，文節iのみに含まれるパスの要素，文節jのみに含まれるパスの要素，両方のパスが合流してから述語までのパスのそれぞれを，"|"で連結して表示．
 """
 import sys
-from q41 import gen_chunks, Chunk
 from q40 import Morph
+from q41 import gen_chunks, Chunk
 from itertools import combinations
 
 # chunkと[chunk1,chunk2,...]が与えられたら
@@ -75,26 +68,25 @@ def main(chunks):
                 output = [i_term,j_term]
             print " -> ".join(output)
         else:
-#(3b)そうでない場合
-            k_path = (i_path & j_path)
-            i_path = (i_path - k_path)
-            j_path = (j_path - k_path)
+#(3b)そうでない場合(途中で合流する場合)
+            k_path = (i_path & j_path) #合流点以降のパス
+            i_path = (i_path - k_path) #iからk(合流点)までのパス
+            j_path = (j_path - k_path) #jからkまでのパス
 
             i_chunks = connect_path(sorted(list(i_path)),chunks)
             j_chunks = connect_path(sorted(list(j_path)),chunks)
             k_chunks = connect_path(sorted(list(k_path)),chunks)
-            #わるいのはここ
+            #chunkリストの先頭=名詞を含んだchunkであり，これをXとYで置換すればよい
             i_chunks[0] = replace_leftmost_noun(i_chunks[0],u"X")
             j_chunks[0] = replace_leftmost_noun(j_chunks[0],u"Y")
 
+            #それぞれを->で結合しておく
             i_term = " -> ".join(x.chunk2str() for x in i_chunks)
             j_term = " -> ".join(x.chunk2str() for x in j_chunks)
             k_term = " -> ".join(x.chunk2str() for x in k_chunks)
 
             output = [i_term,j_term,k_term]
             print " | ".join(output)
-        # print chunk_i.chunk2str()
-        # print chunk_j.chunk2str()
 
 if __name__ == "__main__":
     for chunks in gen_chunks(sys.stdin):
