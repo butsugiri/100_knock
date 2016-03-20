@@ -24,7 +24,6 @@ def gather_coreference(tree):
     return coref_dict
 
 def replace_by_coreference(tree,coref):
-    sentences = {}
     endpoint = -1
     for sent in tree.xpath("//sentence[@id]"):
         s_id = int(sent.attrib.get("id"))
@@ -36,6 +35,7 @@ def replace_by_coreference(tree,coref):
             if endpoint == w_idx:
                 print "]",
             print token.find("word").text,
+        print
 
 
 if __name__ == "__main__":
