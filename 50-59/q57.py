@@ -8,6 +8,7 @@ Stanford Core NLPの係り受け解析の結果（collapsed-dependencies）を�
 
 実行例
 python q57.py | dot -Tpng -o hogehoge.png
+https://gyazo.com/53df0b44496b11d36be2bc0f4f1ed996
 """
 import sys
 from lxml import etree
