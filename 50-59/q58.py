@@ -35,9 +35,9 @@ def extract_tuples(tree):
             #xpathでnsubjを探索したので，子は絶対に主語になっている
             sub_txt = node.find("dependent").text
 
-            query = "dep[@type='dobj']/governor[@idx='{}']".format(pre_idx)
             #目的語を探す
             #typeがdobj&&dobjとnsubjの親ノードであるようなノード
+            query = "dep[@type='dobj']/governor[@idx='{}']".format(pre_idx)
             obj_nodes = sent_dep.findall(query)
             if obj_nodes:
                 obj_txt = obj_nodes[0].getnext().text
