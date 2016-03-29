@@ -27,6 +27,7 @@ def lineInEachTxt(total_ln, N, n):
 def main(inp,N,fname):
     with open(inp,"r") as f:
         total_ln = sum(1 for i in f)
+        f.seek(0) #i.e. ファイルを再オープン
         for n in range(N):
             with open(fname + str(n),"w") as fo:
                 for n, line in zip(range(lineInEachTxt(total_ln, N, n)), f):

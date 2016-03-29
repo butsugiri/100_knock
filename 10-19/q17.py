@@ -18,7 +18,7 @@ def main(inp):
         col_1 = line.split("\t")[0]
         s.add(col_1)
 
-    for l in list(s):
+    for l in s: #OR list(s)
         print l
 
 if __name__ == "__main__":
