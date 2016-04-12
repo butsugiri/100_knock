@@ -13,18 +13,21 @@ window = 5
 def extract_context(tokens):
     for n,token in enumerate(tokens):
         width = randint(1,window)
+        contexts = []
         for m in xrange(max(0,n-width),min(len(tokens),width+n)):
             if m == n:
                 continue
             else:
-                yield token,tokens[m]
+                contexts.append(tokens[m])
+        yield token, "\t".join(contexts)
+        contexts = []
 
 def main(fi):
     for line in fi:
         tokens = line.rstrip().split()
         for t,c in extract_context(tokens):
-            print "{}\t{}".format(t,c)
-
+            if c:
+                print "{}\t{}".format(t,c)
 
 if __name__ == "__main__":
     main(sys.stdin)
