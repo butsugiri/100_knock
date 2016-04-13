@@ -6,6 +6,7 @@ import sys
 
 def main(fi):
     countries = {}
+# 国名を読み込んで，辞書に保存
     with open("./data/country_name.txt","r") as f:
         for line in f:
             if line.startswith("#"):
@@ -16,6 +17,8 @@ def main(fi):
                     name = "_".join(line.split())
                     countries[line] = name
 
+#行ごとに，国名辞書を走査して，国名の有無を判定
+#国名が見つかったら，空白をアンダーバー_で置換
     for line in fi:
         line = line.rstrip()
         for country in countries.iterkeys():
@@ -27,5 +30,6 @@ if __name__ == "__main__":
     main(sys.stdin)
 
 """
-python q81.py < data/stripped_enwiki.txt > data/country_enwiki.txt
+usage:
+bzcat ./data/enwiki.txt.bz2 |  python q80.py | python q81.py
 """
