@@ -6,13 +6,7 @@
 import sys
 import numpy as np
 import matplotlib.pyplot as plt
-
-def load_freq(fi):
-    d = {}
-    for line in fi:
-        term,freq = line.rstrip().split("\t")
-        d[term] = int(freq)
-    return d
+from q36 import count_terms
 
 def draw_bargraph(term_freq):
     N = 10
@@ -33,7 +27,7 @@ def draw_bargraph(term_freq):
     plt.show()
 
 if __name__ == "__main__":
-    freq = load_freq(sys.stdin)
+    freq = count_terms(sys.stdin)
     draw_bargraph(freq)
 
 # output: https://gyazo.com/94292f219d69ad6124abb69d57dc1d16
