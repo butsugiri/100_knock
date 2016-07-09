@@ -18,7 +18,4 @@ if __name__ == "__main__":
     with open("./data/out.xml","r") as fi:
         tree = etree.parse(fi)
         for term in iter_terms(tree):
-            word = term["word"]
-            lemma = term["lemma"]
-            pos = term["POS"]
-            print "{}\t{}\t{}".format(word,lemma,pos)
+            print "{word}\t{lemma}\t{POS}".format(**term)

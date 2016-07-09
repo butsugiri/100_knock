@@ -25,11 +25,8 @@ def edges(chunks):
 if __name__ == "__main__":
     for chunks in gen_chunks(sys.stdin):
         edges = edges(chunks)
-        n = pydot.Node('node')
-        n.fontsize = 9
         #(src,dst)のタプルを要素として持つlistを与えればよい
         g = pydot.graph_from_edges(edges, directed = True)
-        g.add_node(n)
         g.write_jpeg("./data/graph.jpg", prog='dot')
 
 # https://gyazo.com/b938524cf208126f472d757cd50a6d69

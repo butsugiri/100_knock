@@ -8,9 +8,9 @@ import sys
 from stemming.porter2 import stem
 
 def main(fi):
-    for word in fi:
-        word = word.rstrip()
-        print stem(word)
+    for word in [stem(x.rstrip()) for x in fi]:
+        print word
 
 if __name__ == "__main__":
     main(sys.stdin)
+

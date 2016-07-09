@@ -32,15 +32,39 @@ def extract_verb_frame(chunks):
         for chunk in v:
             for morph in chunk.morphs:
                 if morph.pos == u"助詞":
-                    joshi_lis.append(morph.surface)
+                    joshi = morph.surface
+            joshi_lis.append(joshi)
             phrase_lis.append(chunk.chunk2str())
         if joshi_lis and phrase_lis:
             joshi = " ".join(joshi_lis)
             phrase = " ".join(phrase_lis)
             print "{}\t{}\t{}".format(k,joshi,phrase)
 
-def format_chunks(chunks):
-    pass
 if __name__ == "__main__":
     for chunks in gen_chunks(sys.stdin):
         extract_verb_frame(chunks)
+
+"""
+output
+
+つく    か が   生れたか 見当が
+生れる  で      どこで
+する    て は   泣いて いた事だけは
+泣く    で      所で
+いる    て は   泣いて いた事だけは
+見る    は を   吾輩は ものを
+始める  で      ここで
+聞く    で      あとで
+食う    て      煮て
+煮る    て      捕えて
+捕える  を      我々を
+思う    から    なかったから
+載せる  に      掌に
+持ち上げる      て と   載せられて スーと
+られる  に て と        掌に 載せられて スーと
+ある    が      感じが
+見る    て を の        落ちついて 顔を ものの
+落ちつく        で      上で
+残る    が でも 感じが 今でも
+思う    と      ものだと
+"""

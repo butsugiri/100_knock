@@ -18,5 +18,5 @@ def split_line(match):
 p = re.compile(r"[.;:?!]\s[A-Z]")
 
 for line in fi:
-    fo.write(p.sub(split_line,line.rstrip()) + "\n")
+    fo.write(p.sub(split_line,line))
 

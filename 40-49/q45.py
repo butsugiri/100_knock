@@ -20,11 +20,12 @@ def extract_v_pattern(chunks):
                     if morph.pos == u"助詞":
                         joshi = morph.surface
                 d[verb].add(joshi)
-    return d
+    yield d
+    d = defaultdict(set)
 
 if __name__ == "__main__":
     for chunks in gen_chunks(sys.stdin):
-        verb_joshi_pair = extract_v_pattern(chunks)
-        for verb,joshi in verb_joshi_pair.iteritems():
-            joshi = " ".join(joshi)
-            print "{}\t{}".format(verb,joshi)
+        for d in extract_v_pattern(chunks):
+            for verb, joshi in d.iteritems():
+                joshi = " ".join(joshi)
+                print "{}\t{}".format(verb,joshi)
